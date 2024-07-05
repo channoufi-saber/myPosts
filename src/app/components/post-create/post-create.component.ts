@@ -11,18 +11,17 @@ export class PostCreateComponent implements OnInit {
 
   enteredTitle = "";
   enteredContent = "";
+
+  constructor(public postsService: PostsService) {}
+  ngOnInit(): void {
+    throw new Error('Method not implemented.');
+  }
+
   onAddPost(form: NgForm) {
     if (form.invalid) {
       return;
     }
     this.postsService.addPost(form.value.title, form.value.content);
     form.resetForm();
-
-
   }
-
-  constructor(public postsService: PostsService) {}
-
-  ngOnInit(): void {}
-
 }
