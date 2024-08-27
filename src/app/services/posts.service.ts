@@ -22,12 +22,13 @@ export class PostsService {
       .pipe(
         map(postData => {
           return {
-            posts: postData.posts.map((post: { title: any; content: any; _id: any; imagePath: any; }) => {
+            posts: postData.posts.map((post: { title: any; content: any; _id: any; imagePath: any; creator: any }) => {
               return {
                 title: post.title,
                 content: post.content,
                 id: post._id,
-                imagePath: post.imagePath
+                imagePath: post.imagePath,
+                creator: post.creator
               };
             }),
             maxPosts: postData.maxPosts
@@ -36,6 +37,7 @@ export class PostsService {
       )
       .subscribe(transformedPostData => {
         this.posts = transformedPostData.posts;
+        console.log(transformedPostData)
         this.postsUpdated.next({
           posts: [...this.posts],
           postCount: transformedPostData.maxPosts
